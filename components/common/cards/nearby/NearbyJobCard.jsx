@@ -21,7 +21,7 @@ const NearbyJobCard = ({ post, handleNavigate }) => {
         </View>
       </ScrollView>
       <View>
-        <Text>Description</Text>
+        <Text>{post.postName}</Text>
       </View>
     </TouchableOpacity>
   )
