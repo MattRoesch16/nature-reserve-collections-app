@@ -9,7 +9,7 @@ const useFetch = (endpoint, query) => {
 
     const options = {
         method: 'GET',
-        url: `https://google.com/${endpoint}`,
+        url: 'http://localhost:3000/employees',
         params: { ...query },
     };
 
