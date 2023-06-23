@@ -10,6 +10,7 @@ const useFetch = (endpoint, query) => {
     const options = {
         method: 'GET',
         url: 'http://localhost:3000/employees',
+        headers: {'Access-Control-Allow-Header': true},
         params: { ...query },
     };
 

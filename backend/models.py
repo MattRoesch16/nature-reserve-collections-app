@@ -41,6 +41,7 @@ class Tags(db.Model):
 class MyPictures(db.Model):
     __tablename__ = "MYPICTURE"
     Pictureid = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    Image = db.Column(db.Text, unique=True, nullable=False)
     DateTaken = db.Column(db.String(10), unique=False, nullable=False)
     Notes = db.Column(db.Text, unique=False, nullable=True)
 
@@ -58,3 +59,29 @@ class Animal_Pictures(db.Model):
     Pictureid = db.Column(db.Integer, db.ForeignKey('MYPICTURE.Pictureid'), primary_key=True, nullable=False)
     IntPicture = db.relationship("MyPictures", backref=db.backref("MYPICTURE", uselist=False))
 
+class Posts(db.Model):
+    __tablename__ = "POST"
+    Postid = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    Userid = db.Column(db.Integer, db.ForeignKey('USER.Userid'), primary_key=True, nullable=False)
+    IntPostPic = db.relationship("Users", backref=db.backref("USERPOST", uselist=False))
+
+class Post_Pictures(db.Model):
+    __tablename__ = "POST_PICTURE"
+    Postid = db.Column(db.Integer, db.ForeignKey('POST.Postid'), primary_key=True, nullable=False)
+    IntPostPic = db.relationship("Animals", backref=db.backref("ANIMALPIC", uselist=False))
+    Pictureid = db.Column(db.Integer, db.ForeignKey('MYPICTURE.Pictureid'), primary_key=True, nullable=False)
+    IntPicture = db.relationship("MyPictures", backref=db.backref("POSTPIC", uselist=False))
+
+class Picture_Locations(db.Model):
+    __tablename__ = "LOCATION_PICTURE"
+    Locationid = db.Column(db.Integer, db.ForeignKey('LOCATION.Locationid'), primary_key=True, nullable=False)
+    IntLocationPic = db.relationship("Locations", backref=db.backref("LOCATIONPIC", uselist=False))
+    Pictureid = db.Column(db.Integer, db.ForeignKey('MYPICTURE.Pictureid'), primary_key=True, nullable=False)
+    IntPicture = db.relationship("MyPictures", backref=db.backref("LOCATIONPIC", uselist=False))
+
+class Animal_Locations(db.Model):
+    __tablename__ = "ANIMAL_LOCATION"
+    Locationid = db.Column(db.Integer, db.ForeignKey('LOCATION.Locationid'), primary_key=True, nullable=False)
+    IntLocationPic = db.relationship("Locations", backref=db.backref("LOCATIONANIMAL", uselist=False))
+    Animalid = db.Column(db.Integer, db.ForeignKey('ANIMAL.Animalid'), primary_key=True, nullable=False)
+    IntAnimalPic = db.relationship("Animals", backref=db.backref("ANIMALLOCATION", uselist=False))

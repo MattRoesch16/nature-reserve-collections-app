@@ -38,5 +38,6 @@
   },
   "name": "nature-reserve-collections-app",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "proxy": "http://localhost:3000/"
 }

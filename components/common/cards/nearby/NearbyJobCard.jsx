@@ -9,7 +9,7 @@ const NearbyJobCard = ({ post, handleNavigate }) => {
   return (
     <TouchableOpacity style={styles.postContainer} onPress={handleNavigate}>
       <View>
-        <Text style={{marginBottom: 10}}>User Name</Text>
+        <Text style={{marginBottom: 10}}>{post}</Text>
       </View>
       <ScrollView>
         <View style={styles.imageContainer}>
@@ -21,7 +21,7 @@ const NearbyJobCard = ({ post, handleNavigate }) => {
         </View>
       </ScrollView>
       <View>
-        <Text>Description</Text>
+        <Text>{post}: Description</Text>
       </View>
     </TouchableOpacity>
   )

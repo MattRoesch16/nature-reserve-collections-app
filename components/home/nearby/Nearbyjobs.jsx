@@ -1,5 +1,6 @@
-import React from 'react'
-import { View, Text, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, ActivityIndicator, TouchableOpacity, ToastAndroid } from 'react-native'
+import axios from 'axios';
 
 import styles from './nearbyjobs.style'
 import { COLORS } from '../../../constants';
@@ -9,9 +10,23 @@ import useFetch from '../../../hook/useFetch'
 
 const Nearbyjobs = () => {
   const router = useRouter();
+  const [userName, setUserName] = useState();
+  const [ID , setID] = useState();
+  const [post, setPost] = useState([]);
 
   const { data, isLoading, error } = useFetch({
     
+  })
+
+  useEffect (() => {
+    axios.get('http://localhost:3000/profile')
+    .then(response => setUserName(response.data.firstName))
+    .catch(error => console.log(error))
+  })
+  useEffect (() => {
+    axios.get('http://localhost:3000/employees')
+    .then(response => console.log(response.data))
+    .catch(error => console.log(error))
   })
 
   return (
@@ -29,12 +44,8 @@ const Nearbyjobs = () => {
           />
         ))
       )}
-      <NearbyJobCard>
-
-      </NearbyJobCard>
-      <NearbyJobCard>
-        
-      </NearbyJobCard>
+      <NearbyJobCard post={userName} handleNavigate={() => router.push(`/post-details`)}/>
+      <NearbyJobCard />
     </View>
   )
 }
