@@ -5,12 +5,13 @@ import {COLORS, icons, images, SIZES } from '../../../../constants';
 
 import styles from './nearbyjobcard.style'
 
-const NearbyJobCard = ({ post, handleNavigate }) => {
+const NearbyJobCard = ({userid, description, propic, handleNavigate }) => {
   return (
     <TouchableOpacity style={styles.postContainer} onPress={handleNavigate}>
-      <View>
-        <Text style={{marginBottom: 10}}>{post}</Text>
-      </View>
+      <TouchableOpacity style={{flexDirection: 'row'}}>
+        <Image source={propic} style={{height: 30, width: 30, borderRadius: 15, marginBottom: 10}}/>
+        <Text style={{marginBottom: 10, marginTop: 5, marginLeft: 10}}>{userid}</Text>
+      </TouchableOpacity>
       <ScrollView>
         <View style={styles.imageContainer}>
           <Image 
@@ -21,7 +22,7 @@ const NearbyJobCard = ({ post, handleNavigate }) => {
         </View>
       </ScrollView>
       <View>
-        <Text>{post}: Description</Text>
+        <Text>{userid}: {description}</Text>
       </View>
     </TouchableOpacity>
   )

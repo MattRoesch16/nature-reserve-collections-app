@@ -7,6 +7,7 @@ import { COLORS } from '../../../constants';
 import NearbyJobCard from '../../common/cards/nearby/NearbyJobCard'
 import { useRouter } from 'expo-router'
 import useFetch from '../../../hook/useFetch'
+import { images } from '../../../constants';
 
 const Nearbyjobs = () => {
   const router = useRouter();
@@ -14,38 +15,63 @@ const Nearbyjobs = () => {
   const [ID , setID] = useState();
   const [post, setPost] = useState([]);
 
-  const { data, isLoading, error } = useFetch({
-    
-  })
+  const persons = [
+    {
+    id: "1",
+    name: "Earnest Green",
+    description: "Look at this pretty place",
+    propic: images.profile,
+    },
+    {
+    id: "2",
+    name: "Winston Orn",
+    description: "Just found a new reserve!",
+    propic: images.profile,
+    },
+    {
+    id: "3",
+    name: "Carlton Collins",
+    description: "Holy cow look at this!",
+    propic: images.profile,
+    },
+    {
+    id: "4",
+    name: "Malcolm Labadie",
+    description: "My new peace place <3",
+    propic: images.profile,
+    },
+    {
+    id: "5",
+    name: "Michelle Dare",
+    description: "Shoutout to EHT Nature Reserve! Best place to kayake",
+    propic: images.profile,
+    },
+    {
+    id: "6",
+    name: "Carlton Zieme",
+    description: "The flora and fauna of this reserve are unmatched",
+    propic: images.profile,
+    },
+  ];
 
   useEffect (() => {
     axios.get('http://localhost:3000/profile')
     .then(response => setUserName(response.data.firstName))
     .catch(error => console.log(error))
   })
-  useEffect (() => {
-    axios.get('http://localhost:3000/employees')
-    .then(response => console.log(response.data))
-    .catch(error => console.log(error))
-  })
 
   return (
     <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      {isLoading ? (
-        <ActivityIndicator size="large" colors={COLORS.primary}/>
-      ) : error ? (
-        <Text>Something went wrong</Text>
-      ) : (
-        data?.map((post) => (
+      {persons.map((person) => {
+        return (
           <NearbyJobCard 
-            post={post}
-            key={`nearby-post-${post?.post_id}`}
-            handleNavigate={() => router.push(`/post-details/${post.post_id}`)}
+            userid = {person.name}
+            description={person.description}
+            propic = {person.propic}
+            key={person.id}
           />
-        ))
-      )}
-      <NearbyJobCard post={userName} handleNavigate={() => router.push(`/post-details`)}/>
-      <NearbyJobCard />
+        );
+      })}
     </View>
   )
 }
