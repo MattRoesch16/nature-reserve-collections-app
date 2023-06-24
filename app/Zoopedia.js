@@ -2,9 +2,8 @@ import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, Imag
 import { Stack, useRouter } from 'expo-router';
 
 import {COLORS, icons, images, SIZES } from '../constants';
-import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components';
-
-import styles from '../components/home/welcome/welcome.style'
+import { ScreenHeaderBtn } from '../components';
+import ZoopediaCard from '../components/common/cards/zoopedia/ZoopediaCard';
 
 function LogoTitle() {
     return (
@@ -15,12 +14,11 @@ function LogoTitle() {
     );
   }
 
-const Home = () => {
+const Zoopedia = () => {
     const router = useRouter();
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: COLORS.lightWhite}}>
-
-            <Stack.Screen 
+        <Stack.Screen 
             options={{
                 headerStyle: {backgroundColor: COLORS.primary, alignItems: 'center'},
                 headerShadowVisible: true,
@@ -32,20 +30,18 @@ const Home = () => {
                 ),
                 headerTitle: (props) => <LogoTitle {...props}/>,
                 headerTitleAlign: 'center',
+                headerBackVisible: false
             }}
             />
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ flex:1, padding: SIZES.medium }}>
-                    <Welcome/>
-                    <Popularjobs />
-                    <Nearbyjobs />
-
-                </View>
-            </ScrollView>
+            <View style={{ flex:1, padding: SIZES.medium }}>
+                <ZoopediaCard>
+                    
+                </ZoopediaCard>
+            </View>
 
             <View style={{backgroundColor: COLORS.primary, alignItems: 'center', height: 75, justifyContent: 'space-around', flexDirection: 'row',}}>
-                <ScreenHeaderBtn iconUrl={icons.HomeIcon} dimension="125%" onPress={() => router.push('/home')}/>
+                <ScreenHeaderBtn iconUrl={icons.HomeIcon} dimension="125%" onPress={() => router.back()}/>
                 <ScreenHeaderBtn iconUrl={icons.CameraIcon} dimension="95%" onPress={() => router.push('/camera')}/>
                 <ScreenHeaderBtn iconUrl={icons.ReserveIcon} dimension="75%" onPress={() => router.push('/reserve')}/>
                 <ScreenHeaderBtn iconUrl={icons.AnimalIcon} dimension="90%" handlePress= {() => router.push(`/Zoopedia`)}/>
@@ -55,4 +51,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Zoopedia
