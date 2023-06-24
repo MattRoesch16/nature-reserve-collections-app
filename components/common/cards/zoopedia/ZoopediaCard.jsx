@@ -16,7 +16,7 @@ const ZoopediaCard = ({ post, handleNavigate }) => {
           />
         </View>
       <View style={styles.textContainer}>
-        <Text style={{fontSize: 20}}>Mallard</Text>
+        <Text style={{fontSize: 20, fontWeight: '800'}}>Mallard</Text>
         <Text>Description</Text>
       </View>
     </TouchableOpacity>
